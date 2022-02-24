@@ -4,6 +4,7 @@ def check_host(site):
     """
     Recebe o nome do site e retorna o server em indice 0, a lista das caixas padrão do email em indice 1 e da caixa backup em indice 2.
     """
+    #lista de imaps: https://www.systoolsgroup.com/imap/
 
     if site == "locaweb":
         server = "imap.email-ssl.com.br"
