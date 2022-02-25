@@ -1,7 +1,9 @@
 from functions.__init__ import login_email
-from fastapi import Depends
 from .router_config import router
+from vars import router_names
+from fastapi import Body
 
-@router.post('/login')
-def login(login_info = Depends(login_email)):
+@router.post(router_names[0])
+def login(email = Body(...),password = Body(...),site = Body(...)):
+    login_info = login_email(email,password,site)
     return login_info
