@@ -1,8 +1,8 @@
 from .check.__init__ import check_host
 from imap_tools import MailBox
-from fastapi import HTTPException
+from fastapi import HTTPException, Body
 
-def login_email(email,password,site):
+def login_email(email:str = Body(...),password:str = Body(...),site:str = Body(...)):
     """
     Realiza o login.
     """

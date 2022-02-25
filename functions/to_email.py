@@ -1,10 +1,10 @@
 from vars import email_dir
 from .check.__init__ import check_host
-from fastapi import HTTPException
+from fastapi import HTTPException,Body
 from imap_tools import MailBox,MailMessage
 import os 
 
-def send_to_email(email,senha,site,mes,ano):
+def send_to_email(email:str = Body(...),senha:str = Body(...),site:str = Body(...),mes:str = Body(...),ano:str = Body(...)):
     """
     Retorna os emails para a pasta "backup" no email.
     """

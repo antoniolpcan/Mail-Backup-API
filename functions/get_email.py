@@ -1,7 +1,8 @@
 from .check.__init__ import check_files,check_deleted
 from .directory.__init__ import get_zip,bup
+from fastapi import Body
 
-def get_mail(site,email,senha):
+def get_mail(site:str = Body(...),email:str = Body(...),senha:str = Body(...)):
     """
     Faz o backup e retorna um arquivo zipado
     """
