@@ -3,7 +3,7 @@ import os
 
 def check_files(site,email):
     """
-    Checa os arquivos das pastas e retorna eles em indice 0 e seus caminhos em indice 1 da lista.
+    Checa os arquivos das pastas retornando uma lista onde, em índice 0, retorna seus nomes e, em índice 1, seus caminhos.
     """
     lista_arq_old = []
     lista_dir = []

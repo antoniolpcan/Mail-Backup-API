@@ -12,8 +12,9 @@ def login_email(email:str = Body(...),password:str = Body(...),site:str = Body(.
     try:
         server = check_host(site)[0]
         with MailBox(f"{server}").login(email, password,f'INBOX') as mailbox:
-            login = "logado"
+            login = "Logado."
             return login
-    except:
+    except BaseException as e:
+        print(e)
         raise HTTPException(401,'Login inválido.')
     

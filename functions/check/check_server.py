@@ -3,7 +3,7 @@ from fastapi import HTTPException
 def check_host(site):
     """
     Recebe o nome do site e retorna o server em indice 0, a lista das caixas padrão do email em indice 1 e da caixa backup em indice 2.
-    -lista de imaps: https://www.systoolsgroup.com/imap/
+    - lista de imaps: https://www.systoolsgroup.com/imap/ (locaweb = imap.email-ssl.com.br)
     """
     
     if site in ["locaweb","webmail","locamail","Locaweb","Webmail","Locamail","LOCAWEB","WEBMAIL","LOCAMAIL"]:
@@ -19,5 +19,5 @@ def check_host(site):
         lista_email = ['INBOX','sent','deleted','junk']
         caixa_backup = 'backup'
     else:
-        raise HTTPException(406,detail = "Site não encontrado.")
+        raise HTTPException(406,detail = f"Site '{site}' não encontrado.")
     return [server,lista_email,caixa_backup]

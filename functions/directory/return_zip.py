@@ -5,6 +5,9 @@ from shutil import make_archive
 from datetime import datetime
 
 def get_zip(site,email):
+    """
+    Compacta a pasta backup.
+    """
     data = datetime.today().strftime(date_time)
     tdata = format_date(data)
     
