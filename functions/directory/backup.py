@@ -1,7 +1,7 @@
 from functions.treat_values.__init__ import file_name_format
 from vars import email_dir,mail_file,year,month
 from functions.directory.create_directory import cria_pasta
-from functions.check.__init__ import check_host
+from functions.check.__init__ import check_host,timer
 from fastapi import HTTPException
 from imap_tools import MailBox
 from email import generator
@@ -11,8 +11,9 @@ def bup(site,email,senha,lista_arq_old):
     """
     Realiza backup dos emails.
     """
-    
+
     n = 0
+    time = 0
     new_emails = []
     new_titles = []
     server = check_host(site)[0]
@@ -35,9 +36,11 @@ def bup(site,email,senha,lista_arq_old):
                         with open(outfile_name, 'w') as outfile:
                             gen = generator.Generator(outfile)
                             gen.flatten(msg.obj)  
+                        time = timer(time)
+
         except BaseException as e:
             print(e)
             print('Erro no login.')
             raise HTTPException(401,f"Falha ao fazer backup do email: '{email}' no site {site}. Verifique se o site, seu endereço de email e sua senha estão corretos.")
         
-    return new_titles
+    return [new_titles,new_emails]

@@ -8,6 +8,7 @@ def check_deleted(list_old,lista_dir,list_new,site,email):
     """
 
     deleted_mails = []
+
     for i in list_old:
         if i not in list_new:
             deleted_mails.append(i)
@@ -18,4 +19,7 @@ def check_deleted(list_old,lista_dir,list_new,site,email):
             for dirs in lista_dir:
                 if deleted_file in dirs:
                     shutil.copyfile(f"{dirs}", f"{email_dir}{site}/{email}{in_deleted}{deleted_file}{mail_file}")
+        return deleted_mails
         
+    else:
+        return "Nenhum email foi deletado."
