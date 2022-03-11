@@ -12,8 +12,8 @@ def get_mail(site:str = Body(...),email:str = Body(...),senha:str = Body(...)):
     new_titles = lista_new[0]
     new_mails = lista_new[1]
     deleted = check_deleted(lista_arq_old,lista_dir,new_titles,site,email)
-    name = get_zip(site,email)
-    return {"Email":email, "New_mails":new_mails, "Deleted":deleted, "Name_file": name}
+    #name = get_zip(site,email)
+    return {"Email":email, "New_mails":new_mails, "Deleted":deleted}
     
     
 
