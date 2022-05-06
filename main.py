@@ -5,7 +5,7 @@ import routers.__init__
 app = FastAPI()
 
 app.include_router(
-    routers.__init__.router,
+    routers.__init__.router_imap,
     prefix="/api",                
     tags=["IMap API"],
 )
