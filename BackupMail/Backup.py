@@ -106,13 +106,23 @@ class BackupMail(BaseModel):
         if not os.path.isdir(f"{email_dir}{self.site}/{self.email}/{ano}/{mes}"):
             os.makedirs(f"{email_dir}{self.site}/{self.email}/{ano}/{mes}")
 
-    def remove_dir(self, dir: str) -> str:
+    def remove_dir(self, dir: str) -> None:
         """
         Apaga pasta
         """
         for f in os.listdir(f'{dir}'):
             os.remove(os.path.join(f'{dir}', f))
         os.rmdir(f'{dir}')
+
+    def remove_dir_and_files(self) -> None:
+        """
+        Apaga pasta com tudo dentro
+        """
+        try:
+            shutil.rmtree(f"imap/Emails/{self.site}/{self.email}")
+            return "Backup apagado com sucesso."
+        except:
+            raise HTTPException(404, "Backup não encontrado.")
 
     def get_zip(self) -> str:
         """
@@ -252,15 +262,15 @@ class BackupMail(BaseModel):
         self.validate_date()
         try:
             with MailBox(f"{server}").login(self.email, self.password) as mailbox:
-                if os.path.isdir(f"{email_dir}{self.site}/{self.email}/Deleted"):
-                    lista_file = os.listdir(f"{email_dir}{self.site}/{self.email}/Deleted")
+                if os.path.isdir(f"{email_dir}{self.site}/{self.email}{deleted}"):
+                    lista_file = os.listdir(f"{email_dir}{self.site}/{self.email}{deleted}")
                     for i in lista_file:
-                        with open(f'{email_dir}{self.site}/{self.email}/Deleted/{i}', 'rb') as f:
+                        with open(f'{email_dir}{self.site}/{self.email}{deleted}/{i}', 'rb') as f:
                             msg = MailMessage.from_bytes(f.read())
                         mailbox.append(msg, f'{caixa}')
                     return "Seus emails deletados foram restaurados."
                 else:
-                    print(f"Caminho de backup: '{email_dir}{self.site}/{self.email}/Deleted' não encontrado.")
+                    print(f"Caminho de backup: '{email_dir}{self.site}/{self.email}{deleted}' não encontrado.")
                     return (f"Nenhum email deletado foi encontrado.")
 
         except BaseException as e:

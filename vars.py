@@ -1,4 +1,4 @@
-router_names = ['/','/backup','/email','/get_deleted']
+router_names = ['/','/backup','/email','/deleted','/delete_backup']
 email_dir = "imap/Emails/"
 ziped_dir = "imap/imap_compact/"
 zip_format = "zip"
